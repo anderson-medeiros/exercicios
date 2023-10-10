@@ -9,12 +9,8 @@ def get_number():
     except ValueError:
         get_number()
 
-
-
 number = get_number()
 result = 0
-while result != 1:
-    result = collatz(number)
-    print(result, end=' ')
-    # print(result := collatz(number), end=' ')
+while number and result not in (-1, 1):
+    print(result := collatz(number), end=' ')
     number = result
