@@ -1,16 +1,22 @@
 def collatz(n):
-    if n % 2:
-        return 3 * n + 1
-    return n // 2
+    seq = []
+    def inner_collatz(n):
+        result = (3 * n + 1) if n % 2 else (n // 2)
+        seq.append(result)
+        if -2 < result < 2:
+            return seq
+        return inner_collatz(result)
+    return inner_collatz(n)
 
-def get_number():
+
+def get_int(msg):
     try:
-        return int(input('Insira um número: '))
+        return int(input(msg))
     except ValueError:
-        get_number()
+        print('\033[31mInsira um número inteiro\033[m')
+        get_int(msg)
 
-number = get_number()
-result = 0
-while number and result not in (-1, 1):
-    print(result := collatz(number), end=' ')
-    number = result
+n = get_int('Número: ')
+print(f'sequência collatz de {n}:\033[32m', end=' ')
+print(*collatz(n), sep=' → ')
+
