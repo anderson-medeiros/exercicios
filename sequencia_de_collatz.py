@@ -1,12 +1,8 @@
-def collatz(n):
-    seq = []
-    def inner_collatz(n):
-        result = (3 * n + 1) if n % 2 else (n // 2)
-        seq.append(result)
-        if -2 < result < 2:
-            return seq
-        return inner_collatz(result)
-    return inner_collatz(n)
+def collatz(n, seq=[]):
+    r = (3 * n + 1) if n % 2 else (n // 2)
+    if -2 < r < 2:
+        return seq + [r]
+    return collatz(r, seq + [r])
 
 
 def get_int(msg):
